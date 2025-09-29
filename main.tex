@@ -1,86 +1,59 @@
 \documentclass[a4paper,12pt]{article}
 \usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
 \usepackage[T1]{fontenc}
-% \usepackage[brazil]{babel}
 \usepackage{tikz}
-\usetikzlibrary{mindmap,trees}
-\usepackage{geometry}
-\geometry{margin=1in}
+\usetikzlibrary{shapes,positioning,backgrounds}
+\pgfdeclarelayer{background}
+\pgfsetlayers{background,main}
 
-\title{Mapa Mental: Redes Digitais e Sociedade}
-\author{}
-\date{}
+\usepackage{geometry}
+\geometry{paperheight=300mm, paperwidth=350mm, margin=1.5cm}
+
+\title{Mapa Mental: Redes, Sociedade e Privacidade}
+\author{Leonardo Luz e Diego Prestes}
+\date{\today}
 
 \begin{document}
-
 \maketitle
 
+\vspace{2cm}
+
 \begin{center}
-\begin{tikzpicture}
-  \path[mindmap,concept color=blue,text=white]
-    node[concept] {Redes Digitais e Sociedade}
-    [clockwise from=0]
+\begin{tikzpicture}[every node/.style={draw, thick, rounded corners, align=center, minimum width=30mm, minimum height=12mm, fill=blue!15, font=\sffamily}]
 
-    % Livro: Castells
-    child[concept color=teal] {
-      node[concept] {Castells:\\ Sociedade em Rede}
-      [clockwise from=120]
-      child { node[concept] {Sociedade em rede} }
-      child { node[concept] {Espaço de fluxos\\ e tempo intemporal} }
-      child { node[concept] {Poder da informação} }
-      child { node[concept] {Inclusão e exclusão digital} }
-      child { node[concept] {Reflexão:\\ Transformação estrutural} }
-      child { node[concept] {Pergunta:\\ Como garantir inclusão\\ com privacidade?} }
-    }
+% ---------------- Central Node ----------------
+\node[fill=red!20, minimum width=40mm, minimum height=25mm] (centro) {Redes digitais \\ e sociedade};
 
-    % Dilema das Redes
-    child[concept color=red] {
-      node[concept] {O Dilema das Redes}
-      [clockwise from=210]
-      child { node[concept] {Economia da atenção} }
-      child { node[concept] {Algoritmos manipulativos} }
-      child { node[concept] {Polarização e fake news} }
-      child { node[concept] {Vício digital e saúde mental} }
-      child { node[concept] {Reflexão:\\ Ética nas plataformas} }
-      child { node[concept] {Pergunta:\\ Redes moldam ou\\ refletem padrões sociais?} }
-    }
+% ---------------- Dilema das Redes Branch ----------------
+\node[fill=orange!40, right=6cm of centro, yshift=-4cm] (dilema) {O Dilema das Redes};
+\node[fill=orange!20, above=2.0cm of dilema] (dilema1) {Manipulação algorítmica};
+\node[fill=orange!20, above=0.6cm of dilema] (dilema2) {Economia da atenção};
+\node[fill=orange!20, below=0.6cm of dilema] (dilema3) {Impactos:\\polarização, vício};
+\node[fill=orange!20, below=2.0cm of dilema] (dilema4) {Reflexão:\\Preocupante — ética negligenciada};
 
-    % Privacidade Hackeada
-    child[concept color=orange] {
-      node[concept] {Privacidade Hackeada}
-      [clockwise from=300]
-      child { node[concept] {Cambridge Analytica} }
-      child { node[concept] {Manipulação eleitoral:\\ Trump / Brexit} }
-      child { node[concept] {"Dados são o novo petróleo"} }
-      child { node[concept] {Facebook e uso indevido de dados} }
-      child { node[concept] {Reflexão:\\ Democracia em risco} }
-      child { node[concept] {Pergunta:\\ Podemos garantir liberdade\\ com essa vigilância?} }
-    };
+% ---------------- Castells Branch ----------------
+\node[fill=green!40, above=4cm of centro] (castells) {Castells:\\Sociedade em Rede};
+\node[fill=green!20, above=0.2cm of castells] (castells1) {Estrutura em rede:\\flexível, global};
+\node[fill=green!20, right=0.2cm of castells] (castells2) {Transformações:\\trabalho, cultura, política};
+\node[fill=green!20, left=0.2cm of castells] (castells3) {Informação como poder};
+\node[fill=green!20, below=0.2cm of castells] (castells4) {Reflexão:\\Transformação inevitável, mas desigual};
+
+% ---------------- Privacidade Hackeada Branch ----------------
+\node[fill=purple!40, left=6cm of centro, yshift=-4cm] (privacidade) {Privacidade Hackeada};
+\node[fill=purple!20, above=2.0cm of privacidade] (priv1) {Cambridge Analytica};
+\node[fill=purple!20, above=0.6cm of privacidade] (priv2) {Vigilância digital e uso político dos dados};
+\node[fill=purple!20, below=0.6cm of privacidade] (priv3) {Exemplos:\\Brexit, Trump 2016};
+\node[fill=purple!20, below=2.0cm of privacidade] (priv4) {Reflexão:\\Urgência de regulação e ética profissional};
+
+% ---------------- Connections ----------------
+\begin{scope}[on background layer]
+  \draw[->, thick] (castells) -- (dilema)      node[midway, above] {Lógica em rede potencializa algoritmos};
+  \draw[->, thick] (dilema)   -- (privacidade) node[midway] {Dados pessoais alimentam modelos de manipulação};
+  \draw[->, thick] (castells) -- (privacidade) node[midway, above] {Redes globais favorecem coleta massiva};
+\end{scope}
 
 \end{tikzpicture}
 \end{center}
-
-\vspace{1cm}
-
-\section*{Conexões entre os Ramos}
-\begin{itemize}
-  \item \textbf{Castells + Dilema das Redes:} A lógica em rede permite controle da atenção e manipulação algorítmica.
-  \item \textbf{Castells + Privacidade Hackeada:} O poder da informação se concretiza no uso político dos dados.
-  \item \textbf{Dilema das Redes + Privacidade Hackeada:} Ambos denunciam o uso antiético dos dados e a falta de regulamentação.
-\end{itemize}
-
-\section*{Responsabilidades Éticas (ADS / TPG)}
-\begin{itemize}
-  \item Desenvolver sistemas com foco na dignidade humana.
-  \item Garantir transparência e segurança no uso de dados.
-  \item Recusar demandas que envolvam manipulação de comportamento.
-  \item Pensar ética desde o início dos projetos.
-\end{itemize}
-
-\section*{Ações Pessoais e Profissionais}
-\begin{itemize}
-  \item \textbf{Como cidadão:} usar navegadores seguros, controlar permissões de aplicativos, entender políticas de privacidade.
-  \item \textbf{Como profissional:} respeitar a LGPD, promover justiça algorítmica, proteger o usuário final.
-\end{itemize}
 
 \end{document}
